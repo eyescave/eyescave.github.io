@@ -7,16 +7,14 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
 
-const menuItems = [
-  { icon: Home, label: "Dashboard" },
-  { icon: Settings, label: "Settings" },
-];
+const menuItems = [{ icon: Home, label: "Dashboard" }];
 
 export function DashboardSidebar() {
   return (
-    <Sidebar>
+    <Sidebar className="w-[200px]">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
@@ -33,6 +31,16 @@ export function DashboardSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter className="p-2">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton className="flex items-center gap-2">
+              <Settings className="h-5 w-5" />
+              <span>Settings</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 }
