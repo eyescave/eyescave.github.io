@@ -14,9 +14,12 @@ const Index = () => {
         <DashboardSidebar />
         <main className="flex-1 p-8">
           <div className="flex justify-between items-center mb-8">
-            <div>
-              <h1 className="text-3xl font-bold mb-2">Monitor health of your business</h1>
-              <p className="text-gray-600">Control and analyze your data in the easiest way</p>
+            <div className="flex items-center gap-4">
+              <SidebarTrigger />
+              <div>
+                <h1 className="text-3xl font-bold mb-2">Monitor health of your business</h1>
+                <p className="text-gray-600">Control and analyze your data in the easiest way</p>
+              </div>
             </div>
             <div className="flex items-center gap-4">
               <DailyStreak />
