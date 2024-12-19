@@ -1,5 +1,4 @@
-import { Home, Mail, Clock, MapPin, Settings } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Home, Settings } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -12,9 +11,6 @@ import {
 
 const menuItems = [
   { icon: Home, label: "Dashboard" },
-  { icon: Mail, label: "Messages" },
-  { icon: Clock, label: "History" },
-  { icon: MapPin, label: "Locations" },
   { icon: Settings, label: "Settings" },
 ];
 
