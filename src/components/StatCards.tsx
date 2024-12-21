@@ -9,11 +9,20 @@ interface StreakData {
 
 const DAYS_OF_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+// Helper function to initialize week log
+const initializeWeekLog = () => {
+  const weekLog: { [key: string]: boolean } = {};
+  DAYS_OF_WEEK.forEach((_, index) => {
+    weekLog[index] = false;
+  });
+  return weekLog;
+};
+
 export function StatCards() {
   const [streak, setStreak] = useState<StreakData>({ 
     count: 0, 
     lastClickDate: "", 
-    weekLog: {} 
+    weekLog: initializeWeekLog()
   });
 
   useEffect(() => {
