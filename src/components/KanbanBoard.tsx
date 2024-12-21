@@ -38,10 +38,25 @@ export function KanbanBoard() {
     });
   };
 
-  const moveTask = (taskId: string, newStatus: Task["status"]) => {
+  const handleDragStart = (e: React.DragEvent, taskId: string) => {
+    e.dataTransfer.setData("taskId", taskId);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e: React.DragEvent, status: Task["status"]) => {
+    e.preventDefault();
+    const taskId = e.dataTransfer.getData("taskId");
+    
     setTasks(tasks.map(task => 
-      task.id === taskId ? { ...task, status: newStatus } : task
+      task.id === taskId ? { ...task, status } : task
     ));
+
+    toast({
+      title: "Task moved successfully",
+    });
   };
 
   const columns = [
@@ -71,6 +86,8 @@ export function KanbanBoard() {
           <div
             key={column.status}
             className="bg-muted p-4 rounded-lg"
+            onDragOver={handleDragOver}
+            onDrop={(e) => handleDrop(e, column.status)}
           >
             <h3 className="font-semibold mb-4">{column.title}</h3>
             <div className="space-y-3">
@@ -79,38 +96,11 @@ export function KanbanBoard() {
                 .map((task) => (
                   <Card
                     key={task.id}
-                    className="p-3 cursor-move bg-background"
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, task.id)}
+                    className="p-3 cursor-move bg-background hover:shadow-md transition-shadow"
                   >
                     <p>{task.content}</p>
-                    <div className="flex gap-2 mt-2">
-                      {column.status !== "todo" && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => moveTask(task.id, "todo")}
-                        >
-                          Move to Todo
-                        </Button>
-                      )}
-                      {column.status !== "inProgress" && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => moveTask(task.id, "inProgress")}
-                        >
-                          Move to Progress
-                        </Button>
-                      )}
-                      {column.status !== "done" && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => moveTask(task.id, "done")}
-                        >
-                          Move to Done
-                        </Button>
-                      )}
-                    </div>
                   </Card>
                 ))}
             </div>
