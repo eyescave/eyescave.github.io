@@ -28,7 +28,13 @@ export function StatCards() {
   useEffect(() => {
     const savedStreak = localStorage.getItem("dailyStreak");
     if (savedStreak) {
-      setStreak(JSON.parse(savedStreak));
+      const parsedStreak = JSON.parse(savedStreak);
+      // Ensure weekLog exists and has proper structure
+      setStreak({
+        count: parsedStreak.count || 0,
+        lastClickDate: parsedStreak.lastClickDate || "",
+        weekLog: parsedStreak.weekLog || initializeWeekLog()
+      });
     }
   }, []);
 
