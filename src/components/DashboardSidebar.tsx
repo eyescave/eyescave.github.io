@@ -1,4 +1,5 @@
-import { Home, Settings } from "lucide-react";
+import { Home, Settings, LayoutKanban } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -10,9 +11,14 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 
-const menuItems = [{ icon: Home, label: "Dashboard" }];
+const menuItems = [
+  { icon: Home, label: "Dashboard", path: "/" },
+  { icon: LayoutKanban, label: "Kanban", path: "/kanban" }
+];
 
 export function DashboardSidebar() {
+  const navigate = useNavigate();
+
   return (
     <Sidebar className="w-[200px]">
       <SidebarContent>
@@ -21,7 +27,10 @@ export function DashboardSidebar() {
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.label}>
-                  <SidebarMenuButton className="flex items-center gap-2">
+                  <SidebarMenuButton 
+                    className="flex items-center gap-2"
+                    onClick={() => navigate(item.path)}
+                  >
                     <item.icon className="h-5 w-5" />
                     <span>{item.label}</span>
                   </SidebarMenuButton>
