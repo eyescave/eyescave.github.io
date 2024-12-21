@@ -1,43 +1,38 @@
-import { ListTodo, Clock, CheckCircle2 } from "lucide-react";
+import { Home, Settings, LayoutGrid } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
 
-const items = [
-  {
-    title: "To Do",
-    icon: ListTodo,
-  },
-  {
-    title: "In Progress",
-    icon: Clock,
-  },
-  {
-    title: "Done",
-    icon: CheckCircle2,
-  },
+const menuItems = [
+  { icon: Home, label: "Dashboard", path: "/" },
+  { icon: LayoutGrid, label: "Kanban", path: "/kanban" }
 ];
 
 export function KanbanSidebar() {
+  const navigate = useNavigate();
+
   return (
-    <Sidebar>
+    <Sidebar className="w-[200px]">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Task Status</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton>
-                    <item.icon className="h-4 w-4" />
-                    <span>{item.title}</span>
+              {menuItems.map((item) => (
+                <SidebarMenuItem key={item.label}>
+                  <SidebarMenuButton 
+                    className="flex items-center gap-2"
+                    onClick={() => navigate(item.path)}
+                  >
+                    <item.icon className="h-5 w-5" />
+                    <span>{item.label}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -45,6 +40,16 @@ export function KanbanSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter className="p-2">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton className="flex items-center gap-2">
+              <Settings className="h-5 w-5" />
+              <span>Settings</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 }
