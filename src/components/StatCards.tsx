@@ -1,16 +1,92 @@
-import { Users, ShoppingCart, Eye } from "lucide-react";
+import { Users, ShoppingCart, Trophy } from "lucide-react";
+import { useState, useEffect } from "react";
+
+interface StreakData {
+  count: number;
+  lastClickDate: string;
+  weekLog: { [key: string]: boolean };
+}
+
+const DAYS_OF_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 export function StatCards() {
+  const [streak, setStreak] = useState<StreakData>({ 
+    count: 0, 
+    lastClickDate: "", 
+    weekLog: {} 
+  });
+
+  useEffect(() => {
+    const savedStreak = localStorage.getItem("dailyStreak");
+    if (savedStreak) {
+      setStreak(JSON.parse(savedStreak));
+    }
+  }, []);
+
+  const handleStreakClick = () => {
+    const today = new Date();
+    const todayString = today.toDateString();
+    
+    if (streak.lastClickDate === todayString) {
+      return;
+    }
+
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const isConsecutiveDay = streak.lastClickDate === yesterday.toDateString();
+
+    let newCount;
+    if (!streak.lastClickDate || isConsecutiveDay) {
+      newCount = streak.count + 1;
+    } else if (streak.lastClickDate !== todayString) {
+      newCount = 1;
+    } else {
+      newCount = streak.count;
+    }
+
+    // Update week log
+    const newWeekLog = { ...streak.weekLog };
+    newWeekLog[today.getDay()] = true;
+
+    const newStreak = { 
+      count: newCount, 
+      lastClickDate: todayString,
+      weekLog: newWeekLog
+    };
+    
+    setStreak(newStreak);
+    localStorage.setItem("dailyStreak", JSON.stringify(newStreak));
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-      <div className="stat-card">
+      <div 
+        className="stat-card cursor-pointer"
+        style={{ 
+          background: 'linear-gradient(135deg, #FF8C42 0%, #FFB566 100%)',
+          color: 'white'
+        }}
+        onClick={handleStreakClick}
+      >
         <div className="flex justify-between items-center">
           <div>
-            <p className="text-sm font-medium">Views</p>
-            <h3 className="text-3xl font-bold mt-2">31</h3>
-            <p className="text-sm mt-2">+3 last day</p>
+            <p className="text-sm font-medium">Daily Streak</p>
+            <h3 className="text-3xl font-bold mt-2">{streak.count}</h3>
+            <div className="flex gap-1 mt-2">
+              {DAYS_OF_WEEK.map((day, index) => (
+                <div
+                  key={day}
+                  className={`h-1.5 w-1.5 rounded-full ${
+                    streak.weekLog[index] 
+                      ? 'bg-white' 
+                      : 'bg-white/30'
+                  }`}
+                  title={day}
+                />
+              ))}
+            </div>
           </div>
-          <Eye className="h-8 w-8 opacity-80" />
+          <Trophy className="h-8 w-8 opacity-80" />
         </div>
       </div>
       
