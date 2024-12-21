@@ -1,4 +1,4 @@
-import { Home, Settings, LayoutKanban } from "lucide-react";
+import { Home, Settings, LayoutGrid } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -13,7 +13,7 @@ import {
 
 const menuItems = [
   { icon: Home, label: "Dashboard", path: "/" },
-  { icon: LayoutKanban, label: "Kanban", path: "/kanban" }
+  { icon: LayoutGrid, label: "Kanban", path: "/kanban" }
 ];
 
 export function DashboardSidebar() {
