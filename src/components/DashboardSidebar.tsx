@@ -1,4 +1,4 @@
-import { Home, Settings, LayoutGrid } from "lucide-react";
+import { Home, Settings, LayoutGrid, BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -13,7 +13,8 @@ import {
 
 const menuItems = [
   { icon: Home, label: "Dashboard", path: "/" },
-  { icon: LayoutGrid, label: "Kanban", path: "/kanban" }
+  { icon: LayoutGrid, label: "Kanban", path: "/kanban" },
+  { icon: BookOpen, label: "Habits", path: "/habits" }
 ];
 
 export function DashboardSidebar() {
