@@ -119,7 +119,7 @@ export function StatCards() {
       <div className="stat-card purchases">
         <div className="flex justify-between items-center">
           <div>
-            <p className="text-sm font-medium text-gray-600">Purchases</p>
+            <p className="text-sm font-medium text-gray-600">Total Habits Complete</p>
             <h3 className="text-3xl font-bold mt-2">10</h3>
             <p className="text-sm mt-2 text-gray-600">+1 last day</p>
           </div>
