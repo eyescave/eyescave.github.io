@@ -4,7 +4,6 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/DashboardSidebar";
 import { StatCards } from "@/components/StatCards";
 import { ProfitChart } from "@/components/ProfitChart";
-import { PropertyListings } from "@/components/PropertyListings";
 
 const Index = () => {
   return (
@@ -36,13 +35,8 @@ const Index = () => {
 
           <StatCards />
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
-              <ProfitChart />
-            </div>
-            <div>
-              <PropertyListings />
-            </div>
+          <div className="lg:col-span-2">
+            <ProfitChart />
           </div>
         </main>
       </div>
