@@ -19,9 +19,6 @@ const Index = () => {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <button className="p-2 rounded-lg bg-gray-900 text-white">
-                <Calendar className="h-5 w-5" />
-              </button>
             </div>
           </div>
 
