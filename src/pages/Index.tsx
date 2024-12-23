@@ -35,7 +35,7 @@ const Index = () => {
                   <Button
                     variant="ghost"
                     className="flex items-center gap-2"
-                    onClick={() => navigate('/ideas')}
+                    onClick={() => navigate('/kanban')}
                   >
                     <Lightbulb className="h-4 w-4" />
                     Ideas
